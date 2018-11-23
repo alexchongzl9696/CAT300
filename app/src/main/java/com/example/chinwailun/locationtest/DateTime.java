@@ -33,7 +33,7 @@ public class DateTime extends AppCompatActivity {
     private Spinner mSpinner;
     private Button mButton;
 
-    public void dudfunction(){}
+    public void dudfunction123123(){}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

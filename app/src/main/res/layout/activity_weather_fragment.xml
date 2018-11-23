@@ -1,0 +1,48 @@
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:paddingBottom="0dip"
+        android:paddingLeft="0dip"
+        android:paddingRight="0dip"
+        android:paddingTop="0dip">
+
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <!--the recycler view to hold our weather items -->
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerViewWeather"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#e5fffd"
+                android:padding="1dp"
+                android:paddingVertical="20dp"
+                android:scrollbars="vertical">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/textViewTips"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#87CEFA"
+            android:padding="16dp"
+            android:gravity="center"
+            android:text="."
+            android:textColor="#000000" />
+
+    </LinearLayout>
+
+</FrameLayout>

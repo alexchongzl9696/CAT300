@@ -229,7 +229,7 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
     //part of locationEngineListener
     @Override
     public void onLocationChanged(Location location) {
-        //whenever the location changes we wan to change our origin location and we our camera to new location
+        //whenever the location changes we wan to change our origin location and change our camera to new location
         if (location!=null)
         {
             originLocation=location;

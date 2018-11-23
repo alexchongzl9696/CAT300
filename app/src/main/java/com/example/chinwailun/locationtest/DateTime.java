@@ -33,6 +33,10 @@ public class DateTime extends AppCompatActivity {
     private Spinner mSpinner;
     private Button mButton;
 
+    public void testmethod(){
+        
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,9 +104,6 @@ public class DateTime extends AppCompatActivity {
                 //Toast.makeText(DateTime.this, (String) mDisplayDate.getText() + " ------- " + mSpinner.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
                 Intent mI = new Intent(DateTime.this,MapsActivity.class);
                 startActivity(mI);
-
-
-                // testing testing
             }
         });
     }

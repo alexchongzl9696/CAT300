@@ -1,4 +1,4 @@
-package com.example.chinwailun.locationtest;
+package com.example.chinwailun.cat300;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -14,10 +14,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.example.chinwailun.cat300.MapsActivity;
-import com.example.chinwailun.cat300.R;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -33,13 +29,13 @@ public class DateTime extends AppCompatActivity {
     private Spinner mSpinner;
     private Button mButton;
 
-    public void dudfunction123123(){}
+
+    public void sometesting(){}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_time);
-
         mDisplayDate = (TextView) findViewById(R.id.displayDate);
         mSetDate = (TextView) findViewById(R.id.setDate);
         mInterval = (TextView) findViewById(R.id.interval);

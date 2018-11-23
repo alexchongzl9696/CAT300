@@ -102,8 +102,7 @@ public class DateTime extends AppCompatActivity {
                 startActivity(mI);
 
 
-
-                // this is a test line that is used to test some test
+                // testing testing
             }
         });
     }

@@ -16,7 +16,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.chinwailun.locationtest.DateTime;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -109,7 +108,6 @@ public class MainActivity extends AppCompatActivity
 
            Intent fi = new Intent(this, DateTime.class);
            startActivity(fi);
-           finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

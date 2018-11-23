@@ -100,6 +100,10 @@ public class DateTime extends AppCompatActivity {
                 //Toast.makeText(DateTime.this, (String) mDisplayDate.getText() + " ------- " + mSpinner.getSelectedItem().toString(), Toast.LENGTH_LONG).show();
                 Intent mI = new Intent(DateTime.this,MapsActivity.class);
                 startActivity(mI);
+
+
+
+                // this is a test line that is used to test some test
             }
         });
     }

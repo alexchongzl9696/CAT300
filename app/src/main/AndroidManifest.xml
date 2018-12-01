@@ -30,6 +30,7 @@
         <activity android:name=".weatherAdapter" />
         <activity android:name=".currentWeather" />
         <activity android:name=".Navigation" />
+
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -48,7 +49,8 @@
             android:label="@string/title_activity_fragmentsub"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".fragsub" />
-        <activity android:name="com.example.chinwailun.locationtest.DateTime"></activity>
+        <activity android:name="com.example.chinwailun.locationtest.DateTime" />
+        <activity android:name=".DateTime"></activity>
     </application>
 
 </manifest>

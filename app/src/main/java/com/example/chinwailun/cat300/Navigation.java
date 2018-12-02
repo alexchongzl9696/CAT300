@@ -79,6 +79,7 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
         mapView.getMapAsync(this); //set callback for the onMapReady
 
 
+        //create navigation laucher option then lauch the navigation UI
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +87,7 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
                 NavigationLauncherOptions options  = NavigationLauncherOptions.builder()
                         .origin(originPosition)
                         .destination(destinationPosition)
-                        .shouldSimulateRoute(true)
+                        .shouldSimulateRoute(false) //once we start the navagitaion UI this will stimulate driving the route for us, change to false if dont wan it move auto
                         .build();
                 NavigationLauncher.startNavigation(Navigation.this,options);
             }
@@ -126,7 +127,7 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
         locationEngine.activate();
 
         //this is a feature which if there was a last location then we can get access to it
-        Location lastLocation = locationEngine.getLastLocation();
+        Location lastLocation = locationEngine.getLastLocation(); //here hv red line problem say check permission, but we ady done so, so put suppress warning
         if(lastLocation!=null){
             //if there actually was one location, set that to our origin location
             originLocation = lastLocation;
@@ -147,7 +148,8 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
         // the camera tracking the location  so it accept a boolan true or false so if you wan to be do all of that then u just pass in true and
         //and then we need to supress the permissions
         locationLayerPlugin.setLocationLayerEnabled(true);
-        locationLayerPlugin.setCameraMode(CameraMode.TRACKING);
+
+        locationLayerPlugin.setCameraMode(CameraMode.TRACKING);//as the user location changes, the camera will track
         locationLayerPlugin.setRenderMode(RenderMode.NORMAL);
     }
 
@@ -195,7 +197,7 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
                         }
 
                         //have at least one route
-                        DirectionsRoute currentRoute= response.body().routes().get(0);
+                        DirectionsRoute currentRoute= response.body().routes().get(0); //0 is first one, first one is the highest ranked and recommendation
 
                         if (navigationMapRoute!=null){
                             navigationMapRoute.removeRoute();
@@ -229,7 +231,7 @@ public class Navigation extends AppCompatActivity implements OnMapReadyCallback,
     //part of locationEngineListener
     @Override
     public void onLocationChanged(Location location) {
-        //whenever the location changes we wan to change our origin location and change our camera to new location
+        //whenever the location changes we wan to change our origin location and move our camera to new location
         if (location!=null)
         {
             originLocation=location;

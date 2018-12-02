@@ -1,6 +1,5 @@
 package com.example.chinwailun.cat300;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +11,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 // Here ada satu fragment containing the recycler view to put in with weather info
+// sini declare everything needed
 public class weatherFragment extends Fragment {
 
     private RecyclerView recyclerView;

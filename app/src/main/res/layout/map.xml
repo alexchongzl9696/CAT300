@@ -1,0 +1,121 @@
+<RelativeLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blue"
+    >
+
+    <EditText
+        android:id="@+id/search"
+        android:layout_width="290dp"
+        android:layout_height="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+
+        android:hint="Quick search here"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/B_search"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/search"
+        android:layout_toRightOf="@+id/search"
+        android:background="#00d2ff"
+        android:onClick="onClick"
+
+
+        android:radius="0dp"
+        android:text="Search"
+        android:textSize="12sp" />
+
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/B_museum"
+        android:layout_marginBottom="8dp"
+        map:layout_constraintBottom_toBottomOf="parent"
+        tools:context="com.example.chinwailun.cat300.MainMap"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/B_museum"
+        android:layout_width="71dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/B_bank"
+        android:layout_alignBottom="@+id/B_bank"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:background="@drawable/museum"
+        android:onClick="onClick" />
+
+    <Button
+        android:id="@+id/B_mosque"
+        android:layout_width="71dp"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/B_search"
+        android:layout_toLeftOf="@+id/B_search"
+        android:layout_toStartOf="@+id/B_search"
+        android:background="@drawable/mosque"
+        android:onClick="onClick"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="111dp" />
+
+    <Button
+        android:id="@+id/B_bank"
+        android:layout_width="71dp"
+        android:layout_height="wrap_content"
+
+        android:layout_alignBaseline="@+id/B_cafe"
+        android:layout_alignBottom="@+id/B_cafe"
+        android:layout_toEndOf="@+id/B_museum"
+        android:layout_toRightOf="@+id/B_museum"
+        android:background="@drawable/bank"
+        android:onClick="onClick"
+        tools:layout_editor_absoluteX="144dp"
+        tools:layout_editor_absoluteY="103dp" />
+
+    <Button
+        android:id="@+id/B_hotel"
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/B_search"
+        android:background="@drawable/hotel"
+        android:onClick="onClick"
+        tools:layout_editor_absoluteX="233dp"
+        tools:layout_editor_absoluteY="89dp" />
+
+    <Button
+        android:id="@+id/B_cafe"
+        android:layout_width="69dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/B_hotel"
+        android:layout_alignBottom="@+id/B_hotel"
+        android:layout_toEndOf="@+id/B_bank"
+        android:layout_toRightOf="@+id/B_bank"
+        android:background="@drawable/cafe"
+        android:onClick="onClick"
+        tools:layout_editor_absoluteX="328dp"
+        tools:layout_editor_absoluteY="71dp" />
+    <!--android:background="#80D7FF"
+    android:background="@drawable/mosque"-->
+
+
+</RelativeLayout>

@@ -1,8 +1,6 @@
 package com.example.chinwailun.cat300;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,14 +8,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 // here is an adapter used to put in recycleView
+// Glide adalah a image loading library for Android focused on smooth scrolling.
 
 public class weatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 {
@@ -63,16 +61,17 @@ public class weatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         Date date = DatesHelper.getDate(current.date);
 
         // change the date to the format , no seconds
-        SimpleDateFormat format = new SimpleDateFormat("EEEE, MMM d        hh:mm");
+        SimpleDateFormat format = new SimpleDateFormat("EEEE, MMM d        hh:mm a");
         String displayDate = format.format(date);
 
         // store values in the holder
         weatherItemHolder.textDateTime.setText(displayDate);
         weatherItemHolder.textMain.setText(current.mainHeadline);
         weatherItemHolder.textDescription.setText(current.description);
-       // weatherItemHolder.textTemp.setText(current.temp);
+        // weatherItemHolder.textTemp.setText(current.temp);
 
         //use glide to put the weather image that made from the icon
+        // Glide is a fast and efficient image loading library for Android focused on smooth scrolling.
         Glide.with(context).load("http://openweathermap.org/img/w/" + current.icon + ".png")
                 .placeholder(R.mipmap.ic_launcher)
                 .error(R.mipmap.ic_launcher)
@@ -93,7 +92,7 @@ public class weatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         TextView textDescription;
         ImageView imageIcon;
         TextView textMain;
-       // TextView textTemp;
+        // TextView textTemp;
 
         public WeatherItemHolder(View itemView)
         {
@@ -101,7 +100,7 @@ public class weatherAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
             weatherLayout = (LinearLayout) itemView.findViewById(R.id.weatherLayout);
             textDateTime = (TextView) itemView.findViewById(R.id.textViewDateTime);
-         //   textTemp=(TextView)itemView.findViewById(R.id.textViewTemp);
+            //   textTemp=(TextView)itemView.findViewById(R.id.textViewTemp);
             textMain = (TextView) itemView.findViewById(R.id.textViewWeather);
             textDescription = (TextView) itemView.findViewById(R.id.textViewDescription);
             imageIcon = (ImageView) itemView.findViewById(R.id.imageWeather);

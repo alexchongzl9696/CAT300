@@ -1,7 +1,6 @@
 package com.example.chinwailun.cat300;
 
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,19 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -32,6 +27,10 @@ public class currentWeather extends Fragment {
     TextView weatherDescTextView;
     TextView cityTextView;
     ImageView weatherImageView;
+    TextView humidityTextView;
+    TextView pressureTextView;
+    // TextView minTextView;
+    // TextView maxTextView;
 
     public currentWeather()
     {
@@ -47,6 +46,10 @@ public class currentWeather extends Fragment {
         dateTextView = view.findViewById(R.id.dateTextView);
         weatherDescTextView = view.findViewById(R.id.weatherDescTextView);
         cityTextView = view.findViewById(R.id.cityTextView);
+        humidityTextView = view.findViewById(R.id.humidityTextView);
+        pressureTextView = view.findViewById(R.id.pressureTextView);
+        //minTextView = view.findViewById(R.id.minTextView);
+        //maxTextView = view.findViewById(R.id.maxTextView);
 
         weatherImageView = view.findViewById(R.id.weatherImageView);
 
@@ -82,14 +85,27 @@ public class currentWeather extends Fragment {
                             JSONObject firstWeatherObject = weatherArray.getJSONObject(0);
                             String weatherDescription = firstWeatherObject.getString("description");
                             String city = responseObject.getString("name");
+
+                            String humidity = Integer.toString((int) Math.round(mainJSONObject.getDouble("humidity")));
+                            String pressure = Integer.toString((int) Math.round(mainJSONObject.getDouble("pressure")));
+                            // double min = mainJSONObject.getDouble("temp_min");
+                            //double max = mainJSONObject.getDouble("temp_max");
+
+
                             weatherDescTextView.setText(weatherDescription);
                             cityTextView.setText(city);
+                            humidityTextView.setText(humidity + " %");
+
+                            pressureTextView.setText(pressure + " hPa");
+                            //minTextView.setText(min + " °C");
+
+                            // maxTextView.setText(max + " °C");
 
                             //update weather image accordingly
-                           // int iconResourceId = getResources().getIdentifier
-                           //         ("icon_" + weatherDescription.replace(" ", ""), "drawable", getActivity().getPackageName());
+                            // int iconResourceId = getResources().getIdentifier
+                            //         ("icon_" + weatherDescription.replace(" ", ""), "drawable", getActivity().getPackageName());
 
-                           // weatherImageView.setImageResource(iconResourceId);
+                            // weatherImageView.setImageResource(iconResourceId);
 
                             if(weatherDescription.equals("thunderstorm with light rain")||weatherDescription.equals("thunderstorm with rain")||weatherDescription.equals("thunderstorm with heavy rain")||weatherDescription.equals("light thunderstorm")||weatherDescription.equals("thunderstorm")||weatherDescription.equals("heavy thunderstorm")||weatherDescription.equals("ragged thunderstorm")||weatherDescription.equals("thunderstorm with light drizzle")||weatherDescription.equals("thunderstorm with drizzle")||weatherDescription.equals("thunderstorm with heavy drizzle"))
                             {

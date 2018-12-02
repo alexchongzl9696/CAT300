@@ -1,7 +1,6 @@
 package com.example.chinwailun.cat300;
 
 import android.content.Context;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -11,15 +10,13 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 
 //volley request is used here, GET and JSON parse are put here la
+//Volley is a library that makes networking for Android apps easier and faster.
 
 public class NetworkController
 {
-
-
     // get 5 days weather forecast API key
     private static String WEATHER_CALL = "https://api.openweathermap.org/data/2.5/forecast?q=Penang,malaysia&appid=9eb962a0f991ef83ac25ac500d1db716&units=metric";
 
@@ -126,7 +123,7 @@ public class NetworkController
 
             // get the specific info
             dtEntry.mainHeadline = ob.getString("main");
-           // dtEntry.temp = ob.getInt("temp");
+            // dtEntry.temp = ob.getInt("temp");
             dtEntry.description = ob.getString("description");
             dtEntry.icon = ob.getString("icon");
 

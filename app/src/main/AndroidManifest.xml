@@ -8,6 +8,10 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <!-- nearby places -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permisson.READ_GSERVICES" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -50,7 +54,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".fragsub" />
         <activity android:name="com.example.chinwailun.locationtest.DateTime" />
-        <activity android:name=".DateTime"></activity>
+        <activity android:name=".DateTime" />
+        <activity android:name=".GetNearbyPlacesData" />
+        <activity android:name=".MainMap"></activity>
     </application>
 
 </manifest>

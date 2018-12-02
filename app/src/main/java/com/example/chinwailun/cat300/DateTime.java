@@ -105,17 +105,17 @@ public class DateTime extends AppCompatActivity {
             public void onClick(View v) {
                 ArrayList<Integer> data = new ArrayList<>();
 
-                /*data.add(myear);
+                data.add(myear);
                 data.add(mmonth);
                 data.add(mdayofmonth);
                 data.add(mhour);
-                data.add(mminute);*/
+                data.add(mminute);
 
-                data.add(2018);
+                /*data.add(2018);
                 data.add(10);
                 data.add(30);
                 data.add(12);
-                data.add(0);
+                data.add(0);*/
 
                 Intent mI = new Intent(DateTime.this,MapsActivity.class);
                 mI.putExtra(EXTRA_DATE, data);

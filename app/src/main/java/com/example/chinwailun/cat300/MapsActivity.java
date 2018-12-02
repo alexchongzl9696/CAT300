@@ -1,22 +1,15 @@
 package com.example.chinwailun.cat300;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.DatePicker;
-import android.widget.TimePicker;
 import android.widget.Toast;
-
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -31,36 +24,19 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.GeoPoint;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import org.w3c.dom.Document;
-
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
 import java.util.TimeZone;
-
 import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
-
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-    String receiveDate;
     Date date;
     int numOfDoc = 0;
     final Handler handler = new Handler();
@@ -72,7 +48,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Timestamp time;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     ArrayList<Integer> rDate;
-    //ArrayList<String> rData = getIntent().getStringArrayListExtra("date");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,13 +59,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getView().setClickable(true);
 
         Intent i = getIntent();
-        //receiveDate = i.getStringExtra(DateTime.EXTRA_DATE);
         rDate = i.getIntegerArrayListExtra(DateTime.EXTRA_DATE);
         boolean firstRun = true;
 
         client = LocationServices.getFusedLocationProviderClient(this);
-
-
 
         locReq = new LocationRequest();
         locReq.setInterval(5000);
@@ -159,8 +131,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         docList.add(place);
                                         numOfDoc--;
 
-                                        if (numOfDoc == 0 && userNum == 0) {
+                                        if (numOfDoc == 0 && userNum == 0)
+                                        {
                                             filterDoc(docList);
+                                            return;
                                         }
                                     }
                                 }
@@ -175,6 +149,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void filterDoc(ArrayList<DocumentSnapshot> docList)
     {
+        int i = 0;
+        ArrayList<DocumentSnapshot> docList2 = docList;
         Calendar calTerminate = Calendar.getInstance();
         Calendar calGiven = Calendar.getInstance();
         calTerminate.setTimeZone(TimeZone.getTimeZone("GMT+08:00"));
@@ -184,27 +160,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         calGiven.set(rDate.get(0), rDate.get(1), rDate.get(2), rDate.get(3), rDate.get(4), 0);
 
         while(calGiven.before(calTerminate)) {
-
+            i++;
             Date givenDate = calGiven.getTime(); // get dynamic calendar
 
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    plotMap(docList, givenDate);
+                    int retValue;
+                    retValue = plotMap(docList, givenDate);
+                    if(retValue == 0)
+                        return;
                 }
-            },5000);
+            },i*3000);
 
             //Toast.makeText(this, givenDate.toString(), Toast.LENGTH_LONG).show();
             calGiven.add(Calendar.HOUR_OF_DAY, 1); // add one hour to dynamic calendar
         }
     }
 
-    public void plotMap(ArrayList<DocumentSnapshot> docList, Date givenDate)
+    public int plotMap(ArrayList<DocumentSnapshot> docList, Date givenDate)
     {
-        Toast.makeText(MapsActivity.this, givenDate.toString(), Toast.LENGTH_LONG).show();
-        if(docList.size() != 0)
-            mMap.clear();
-
+        Calendar c = Calendar.getInstance();
+        Calendar c2 = Calendar.getInstance();
+        c.setTime(givenDate);
+        c2.setTime(givenDate);
+        c2.add(Calendar.HOUR, 1);
+        c.setTimeZone(TimeZone.getTimeZone("GMT+08:00"));
+        c2.setTimeZone(TimeZone.getTimeZone("GMT+08:00"));
+        mMap.clear();
+        Toast.makeText(MapsActivity.this, "From : " + c.getTime().toString() + "\nTo      : " + c2.getTime().toString(), Toast.LENGTH_LONG).show();
         for(int i = 0; i < docList.size(); i++)
         {
             if(docList.get(i).getTimestamp("Start").toDate().before(givenDate)
@@ -217,5 +201,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 i--;
             }
         }
+        return docList.size();
     }
 }

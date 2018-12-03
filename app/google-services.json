@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "274178335655-afhukgihj90h386iv6s2hoqkm7og7ae0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chinwailun.cat300",
+            "certificate_hash": "9a1a2557ba2a2f08bc435bb0555993ad4fac51a7"
+          }
+        },
+        {
           "client_id": "274178335655-pvpnvafqb0blinb0tkqmla3gtm4jg6qp.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,57 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274178335655-pvpnvafqb0blinb0tkqmla3gtm4jg6qp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274178335655:android:e30de84649b4c25e",
+        "android_client_info": {
+          "package_name": "com.example.chinwailun.locationtest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274178335655-89l6mchqq3k32q082grslcjnqebomddg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.chinwailun.locationtest",
+            "certificate_hash": "9a1a2557ba2a2f08bc435bb0555993ad4fac51a7"
+          }
+        },
+        {
+          "client_id": "274178335655-pvpnvafqb0blinb0tkqmla3gtm4jg6qp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfI9arikwJfeLCOb396BcGv5dYe25znZs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274178335655-pvpnvafqb0blinb0tkqmla3gtm4jg6qp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

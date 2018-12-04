@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.util.Log;
@@ -20,6 +21,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,8 +34,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class MainActivity extends AppCompatActivity {
     Button btnLogin;
     Button btnSignUp;
-    private TextInputLayout username;
-    private TextInputLayout password;
+    private EditText userName;
+    private EditText Password;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -41,31 +43,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         btnLogin = (Button) findViewById(R.id.btnLogin);
-
+        btnSignUp = (Button) findViewById(R.id.btnSignUp);
+        userName = findViewById(R.id.userName);
+        Password = findViewById(R.id.Password);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent x = new Intent(MainActivity.this, Main.class);
-                startActivity(x);
+                userLogin();
             }
         });
+
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent y = new Intent(MainActivity.this,Register.class);
+                startActivity(y);
+            }
+        });
+
     }
 
-    //public void btnLogin(View view){
-            //userLogin();
-       // }
-        /*if(view==btnSignUp){
-            Intent intent = new Intent(MainActivity.this, Register.class);
-            startActivity(intent);
-        }*/
+    public void userLogin(){
+        String getUser = userName.getText().toString();
+        Log.d("usernametag", getUser);
+        final String getPassword = Password.getText().toString();
 
-
-
-    /*public void userLogin(){
-        String getuser = username.getEditText().getText().toString().trim();
-        final String getPassword = password.getEditText().getText().toString().trim();
-
-        if (TextUtils.isEmpty(getuser)) {
+        if (TextUtils.isEmpty(getUser)) {
             Toast.makeText(this, "Please enter Username", Toast.LENGTH_LONG).show();
             return;
         }
@@ -80,27 +83,27 @@ public class MainActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
                     int numOfUser = task.getResult().size();
                     for (QueryDocumentSnapshot col : task.getResult()){
-                        numOfUser--;
                         final String userDoc = col.getId();
-                        if (getuser.equals(userDoc)){
-                            db.collection("Users").document(userDoc).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        if (getUser.equals(userDoc)){
+                            db.collection("Users").document(userDoc).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                 @Override
-                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                     db.collection("Users").document(userDoc).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                                         @Override
                                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                             if(task.getResult().get("Password").equals(getPassword)){
-
+                                                Intent x = new Intent(MainActivity.this, Main.class);
+                                                startActivity(x);
                                             }
                                         }
-                                    }
+                                    });
                                 }
 
-                            }
+                            });
                         }
                     }
                 }
             }
-        }
-    }*/
+        });
+    }
 }

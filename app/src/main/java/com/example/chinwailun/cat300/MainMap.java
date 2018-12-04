@@ -33,6 +33,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainMap extends FragmentActivity implements OnMapReadyCallback,
@@ -40,7 +41,9 @@ public class MainMap extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener{
 
+    ArrayList<String> multiDataTransfer = new ArrayList<>();
 
+    Object dataTransfer[] = new Object[2];
     private GoogleMap mMap;
     private GoogleApiClient client;
     private LocationRequest locationRequest;
@@ -98,6 +101,25 @@ public class MainMap extends FragmentActivity implements OnMapReadyCallback,
             bulidGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
+
+        /*multiDataTransfer.add("restaurant");
+        multiDataTransfer.add("stadium");
+        multiDataTransfer.add("shopping_mall");
+
+        mMap.clear();
+        String a = "restaurant";
+        String b = "stadium";
+        String c = "shopping_mall";
+        String[] url = null;
+        url[0] = getUrl(latitude, longitude, a);
+        url[1] = getUrl(latitude, longitude, b);
+        url[2] = getUrl(latitude, longitude, c);
+        dataTransfer[0] = mMap;
+        dataTransfer[1] = url;
+
+        com.example.chinwailun.cat300.GetNearbyPlacesData getNearbyPlacesData = new com.example.chinwailun.cat300.GetNearbyPlacesData();
+        getNearbyPlacesData.execute(dataTransfer);
+        Toast.makeText(MainMap.this, "Showing Nearby Museum", Toast.LENGTH_SHORT).show();*/
     }
 
 
@@ -141,7 +163,6 @@ public class MainMap extends FragmentActivity implements OnMapReadyCallback,
 
         //create object array, it will store two objects so the first object will be mMap and
         //second is URL
-        Object dataTransfer[] = new Object[2];
 
         //create an object of class GetNearbyPLacesData
         com.example.chinwailun.cat300.GetNearbyPlacesData getNearbyPlacesData = new com.example.chinwailun.cat300.GetNearbyPlacesData();

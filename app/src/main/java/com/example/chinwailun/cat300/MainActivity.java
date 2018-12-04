@@ -31,6 +31,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     Button btnLogin;
     Button btnSignUp;
@@ -92,8 +94,7 @@ public class MainActivity extends AppCompatActivity {
                                         @Override
                                         public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                                             if(task.getResult().get("Password").equals(getPassword)){
-                                                Intent x = new Intent(MainActivity.this, Main.class);
-                                                startActivity(x);
+                                                login();
                                             }
                                         }
                                     });
@@ -105,5 +106,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void login(){
+        final String userID;
+        final String userPassword;
+        userID= userName.getText().toString();
+        userPassword = Password.getText().toString();
+        Intent x = new Intent(MainActivity.this, Main.class);
+        x.putExtra("ID",userID);
+        x.putExtra("Password",userPassword);
+        startActivity(x);
     }
 }

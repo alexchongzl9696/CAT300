@@ -31,6 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -115,12 +116,10 @@ public class Register extends AppCompatActivity {
         String Age = "Age";
         String email = "Email";
         String password = "Password";
-
         String emailInput = Email.getText().toString();
         String ageInput = age.getText().toString();
         String usernameInput = UserName.getText().toString();
         String passwordInput = Password.getText().toString();
-
         Map <String, String> newUser = new HashMap< >();
         newUser.put(Age,ageInput);
         newUser.put(password,passwordInput);

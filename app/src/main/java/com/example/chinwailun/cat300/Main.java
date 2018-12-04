@@ -32,7 +32,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    String userID;
+    String userPassword;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -41,6 +42,7 @@ public class Main extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getIntentValue();
 
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -90,12 +92,23 @@ public class Main extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             Intent userProfile = new Intent(Main.this,UserProfile.class);
+            userProfile.putExtra("ID",userID);
+            userProfile.putExtra("Password",userPassword);
             startActivity(userProfile);
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    public void getIntentValue(){
+        Intent g = getIntent();
+        if (g.hasExtra("ID")){
+            userID = getIntent().getExtras().getString("ID");
+        }
+        if (g.hasExtra("Password")){
+            userPassword = getIntent().getExtras().getString("Password");
+        }
+    }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override

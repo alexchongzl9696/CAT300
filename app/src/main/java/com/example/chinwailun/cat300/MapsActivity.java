@@ -39,6 +39,7 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     Date date;
+    ArrayList<DocumentSnapshot> docList2;
     int numOfDoc = 0;
     final Handler handler = new Handler();
     private GoogleMap mMap;
@@ -79,7 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 currLocation = locationResult.getLastLocation();
                 float zoomLevel = 15.0f;
                 LatLng sydney = new LatLng(currLocation.getLatitude(), currLocation.getLongitude());
-                Log.d("hahaha1", ""+currLocation.getLatitude());
+                Log.d("hahaha1", "asdasdasd");
                 //mMap.addMarker(new MarkerOptions().position(sydney).title("You are HERE"));
                 if(firstRun == true)
                 {
@@ -101,13 +102,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         Log.d("hahaha2", "asdasd");
         processData();
+        Log.d("hahaha3", "asdasd");
     }
 
     @Override
     protected void onPause()
     {
         super.onPause();
+        Log.d("hahaha4", "asdasd");
         handler.removeCallbacksAndMessages(null);
+        Log.d("hahaha5", "asdasd");
     }
 
     public void processData()
@@ -124,16 +128,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         db.collection("Users").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Log.d("hahaha6", "asdasd");
                 if (task.isSuccessful()) {
                     int numOfUser = task.getResult().size();
                     for (QueryDocumentSnapshot col : task.getResult()) {
                         numOfUser--;
                         final int userNum = numOfUser;
                         final String userDoc = col.getId();
-                        Log.d("hahaha3", col.getId());
                         db.collection("Users").document(userDoc).collection("Schedule").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                Log.d("hahaha7", "asdasd");
                                 if (task.isSuccessful()) {
                                     int numOfDoc = task.getResult().size();
                                     for (DocumentSnapshot place : task.getResult()) {
@@ -143,6 +148,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         if (numOfDoc == 0 && userNum == 0)
                                         {
                                             filterDoc(docList);
+                                            Log.d("hahaha10", "asdasd");
                                             return;
                                         }
                                     }
@@ -159,7 +165,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void filterDoc(ArrayList<DocumentSnapshot> docList)
     {
         int i = 0;
-        ArrayList<DocumentSnapshot> docList2 = docList;
+        docList2 = docList;
         Calendar calTerminate = Calendar.getInstance();
         Calendar calGiven = Calendar.getInstance();
         calTerminate.setTimeZone(TimeZone.getTimeZone("GMT+08:00"));
@@ -171,14 +177,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         while(calGiven.before(calTerminate)) {
             i++;
             Date givenDate = calGiven.getTime(); // get dynamic calendar
-            Log.d("hahaha4", givenDate.toString());
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     int retValue;
                     retValue = plotMap(docList, givenDate);
-                    if(retValue == 0)
+                    Log.d("hahaha8", "asdasd");
+                    if(retValue == 0) {
                         return;
+                    }
                 }
             },i*3000);
 
@@ -210,6 +217,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 i--;
             }
         }
+        Log.d("hahaha9", "asdasd");
         return docList.size();
     }
 }

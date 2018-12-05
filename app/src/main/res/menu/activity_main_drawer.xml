@@ -6,12 +6,12 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_crowd"
-            android:title="Crowd Movement Analysis"
-            android:icon="@drawable/ic_menu_gallery"/>
+            android:title="User Movement Map"
+            android:icon="@drawable/route"/>
         <item
             android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
+            android:icon="@drawable/document"
+            android:title="Travel Schdule" />
         <item
             android:id="@+id/nav_weather_forecast"
             android:icon="@drawable/temperature"
@@ -26,17 +26,5 @@
             android:title="Nearby Places" />
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
-        </menu>
-    </item>
 
 </menu>

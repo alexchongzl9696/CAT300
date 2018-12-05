@@ -45,14 +45,15 @@ public class Main extends AppCompatActivity
         getIntentValue();
 
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setVisibility(FloatingActionButton.GONE);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });*/
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -118,6 +119,8 @@ public class Main extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            Intent travel= new Intent (Main.this,TravelSchedule.class);
+            startActivity(travel);
         } else if (id == R.id.nav_weather_forecast) {
 
             Intent intent=new Intent(Main.this,MainWeather.class);
@@ -131,11 +134,8 @@ public class Main extends AppCompatActivity
         } else if (id == R.id.nav_map) {
             Intent i = new Intent(this,MainMap.class);
             startActivity(i);
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        } else if (id == R.id.nav_crowd) {
+        }
+        else if (id == R.id.nav_crowd) {
             //Intent ci =new Intent(this,MapsActivity.class);
             //startActivity(ci);
 

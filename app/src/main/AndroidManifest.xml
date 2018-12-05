@@ -61,6 +61,7 @@
         <activity
             android:name=".Main"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".TravelSchedule"></activity>
     </application>
 
 </manifest>

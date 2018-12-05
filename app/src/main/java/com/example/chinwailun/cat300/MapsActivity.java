@@ -148,7 +148,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                                         if (numOfDoc == 0 && userNum == 0)
                                         {
                                             filterDoc(docList);
-                                            Log.d("hahaha10", "asdasd");
                                             return;
                                         }
                                     }
@@ -187,7 +186,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         return;
                     }
                 }
-            },i*3000);
+            },i*5000);
 
             //Toast.makeText(this, givenDate.toString(), Toast.LENGTH_LONG).show();
             calGiven.add(Calendar.HOUR_OF_DAY, 1); // add one hour to dynamic calendar

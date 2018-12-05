@@ -81,7 +81,6 @@ public class MainMap extends FragmentActivity implements OnMapReadyCallback,
 
         Intent mapI = getIntent();
         pPlace = mapI.getStringExtra("user_preference");
-
     }
 
     @Override
@@ -117,26 +116,6 @@ public class MainMap extends FragmentActivity implements OnMapReadyCallback,
             bulidGoogleApiClient();
             mMap.setMyLocationEnabled(true);
         }
-
-
-        /*multiDataTransfer.add("restaurant");
-        multiDataTransfer.add("stadium");
-        multiDataTransfer.add("shopping_mall");
-
-        mMap.clear();
-        String a = "restaurant";
-        String b = "stadium";
-        String c = "shopping_mall";
-        String[] url = null;
-        url[0] = getUrl(latitude, longitude, a);
-        url[1] = getUrl(latitude, longitude, b);
-        url[2] = getUrl(latitude, longitude, c);
-        dataTransfer[0] = mMap;
-        dataTransfer[1] = url;
-
-        com.example.chinwailun.cat300.GetNearbyPlacesData getNearbyPlacesData = new com.example.chinwailun.cat300.GetNearbyPlacesData();
-        getNearbyPlacesData.execute(dataTransfer);
-        Toast.makeText(MainMap.this, "Showing Nearby Museum", Toast.LENGTH_SHORT).show();*/
     }
 
     protected synchronized void bulidGoogleApiClient() {
@@ -177,18 +156,10 @@ public class MainMap extends FragmentActivity implements OnMapReadyCallback,
         com.example.chinwailun.cat300.GetNearbyPlacesData getNearbyPlacesData = new com.example.chinwailun.cat300.GetNearbyPlacesData();
         mMap.clear(); //clear the map if there are any markers present
         url[0] = getUrl(latitude,longitude, pPlace);
-        /*String museum = "museum";
-        String cafe = "cafe";
-        String spa = "spa";
-        url[0] = getUrl(latitude, longitude, museum);
-        url[1] = getUrl(latitude, longitude, cafe);
-        url[2] = getUrl(latitude, longitude, spa);*/
-        //create object array, it will store two objects so the first object will be mMap and
-        //second is URL
         dataTransfer[0] = mMap;
         dataTransfer[1] = url[0];
 
-        String result1 = getNearbyPlacesData.execute(dataTransfer).getStatus().toString();
+        getNearbyPlacesData.execute(dataTransfer);
         Toast.makeText(MainMap.this, "Nearby " + pPlace + " you might be interested in : ", Toast.LENGTH_SHORT).show();
     }
 

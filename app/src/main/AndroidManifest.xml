@@ -21,8 +21,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            >
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -59,8 +58,9 @@
         <activity android:name=".MainMap" />
         <activity android:name=".Register" />
         <activity android:name=".UserProfile" />
-        <activity android:name=".Main"
-            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Main"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

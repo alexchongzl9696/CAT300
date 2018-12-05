@@ -116,6 +116,7 @@ public class Register extends AppCompatActivity {
         String Age = "Age";
         String email = "Email";
         String password = "Password";
+        String preference = "Preference";
         String emailInput = Email.getText().toString();
         String ageInput = age.getText().toString();
         String usernameInput = UserName.getText().toString();
@@ -124,6 +125,7 @@ public class Register extends AppCompatActivity {
         newUser.put(Age,ageInput);
         newUser.put(password,passwordInput);
         newUser.put(email,emailInput);
+        newUser.put(preference,"aquarium");
         db.collection("Users").document(usernameInput).set(newUser)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

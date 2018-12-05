@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -45,7 +46,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LocationCallback locCallback;
     private Location currLocation;
     private FusedLocationProviderClient client;
-    private Timestamp time;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     ArrayList<Integer> rDate;
 
@@ -60,7 +60,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Intent i = getIntent();
         rDate = i.getIntegerArrayListExtra(DateTime.EXTRA_DATE);
-        boolean firstRun = true;
 
         client = LocationServices.getFusedLocationProviderClient(this);
 
@@ -80,6 +79,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 currLocation = locationResult.getLastLocation();
                 float zoomLevel = 15.0f;
                 LatLng sydney = new LatLng(currLocation.getLatitude(), currLocation.getLongitude());
+                Log.d("hahaha1", ""+currLocation.getLatitude());
                 //mMap.addMarker(new MarkerOptions().position(sydney).title("You are HERE"));
                 if(firstRun == true)
                 {
@@ -99,7 +99,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        Log.d("hahaha2", "asdasd");
         processData();
+    }
+
+    @Override
+    protected void onPause()
+    {
+        super.onPause();
+        handler.removeCallbacksAndMessages(null);
     }
 
     public void processData()
@@ -122,6 +130,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         numOfUser--;
                         final int userNum = numOfUser;
                         final String userDoc = col.getId();
+                        Log.d("hahaha3", col.getId());
                         db.collection("Users").document(userDoc).collection("Schedule").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -162,7 +171,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         while(calGiven.before(calTerminate)) {
             i++;
             Date givenDate = calGiven.getTime(); // get dynamic calendar
-
+            Log.d("hahaha4", givenDate.toString());
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {

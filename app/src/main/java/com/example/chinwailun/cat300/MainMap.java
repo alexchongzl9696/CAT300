@@ -2,6 +2,7 @@ package com.example.chinwailun.cat300;
 
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -30,6 +31,14 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
 
 
 import java.io.IOException;
@@ -39,10 +48,13 @@ import java.util.List;
 public class MainMap extends FragmentActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener{
+        LocationListener,
+        MapboxMap.OnMarkerClickListener{
 
+    String pPlace;
     ArrayList<String> multiDataTransfer = new ArrayList<>();
-
+    double mLat, mLong;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     Object dataTransfer[] = new Object[2];
     private GoogleMap mMap;
     private GoogleApiClient client;
@@ -66,6 +78,10 @@ public class MainMap extends FragmentActivity implements OnMapReadyCallback,
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        Intent mapI = getIntent();
+        pPlace = mapI.getStringExtra("user_preference");
+
     }
 
     @Override
@@ -102,6 +118,7 @@ public class MainMap extends FragmentActivity implements OnMapReadyCallback,
             mMap.setMyLocationEnabled(true);
         }
 
+
         /*multiDataTransfer.add("restaurant");
         multiDataTransfer.add("stadium");
         multiDataTransfer.add("shopping_mall");
@@ -122,7 +139,6 @@ public class MainMap extends FragmentActivity implements OnMapReadyCallback,
         Toast.makeText(MainMap.this, "Showing Nearby Museum", Toast.LENGTH_SHORT).show();*/
     }
 
-
     protected synchronized void bulidGoogleApiClient() {
         client = new GoogleApiClient.Builder(this).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(LocationServices.API).build();
         client.connect();
@@ -131,7 +147,7 @@ public class MainMap extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     public void onLocationChanged(Location location) {
-
+        String[] url = new String[3];
         latitude = location.getLatitude();
         longitude = location.getLongitude();
         lastlocation = location;
@@ -155,6 +171,25 @@ public class MainMap extends FragmentActivity implements OnMapReadyCallback,
         {
             LocationServices.FusedLocationApi.removeLocationUpdates(client,this);
         }
+
+
+
+        com.example.chinwailun.cat300.GetNearbyPlacesData getNearbyPlacesData = new com.example.chinwailun.cat300.GetNearbyPlacesData();
+        mMap.clear(); //clear the map if there are any markers present
+        url[0] = getUrl(latitude,longitude, pPlace);
+        /*String museum = "museum";
+        String cafe = "cafe";
+        String spa = "spa";
+        url[0] = getUrl(latitude, longitude, museum);
+        url[1] = getUrl(latitude, longitude, cafe);
+        url[2] = getUrl(latitude, longitude, spa);*/
+        //create object array, it will store two objects so the first object will be mMap and
+        //second is URL
+        dataTransfer[0] = mMap;
+        dataTransfer[1] = url[0];
+
+        String result1 = getNearbyPlacesData.execute(dataTransfer).getStatus().toString();
+        Toast.makeText(MainMap.this, "Nearby " + pPlace + " you might be interested in : ", Toast.LENGTH_SHORT).show();
     }
 
     public void onClick(View v)
@@ -331,5 +366,13 @@ public class MainMap extends FragmentActivity implements OnMapReadyCallback,
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+    }
+
+    @Override
+    public boolean onMarkerClick(@NonNull com.mapbox.mapboxsdk.annotations.Marker marker) {
+        mLat = marker.getPosition().getLatitude();
+        mLong = marker.getPosition().getLongitude();
+        Log.d("abc123", ""+mLat+","+mLong);
+        return false;
     }
 }

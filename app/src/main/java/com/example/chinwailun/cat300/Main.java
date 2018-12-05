@@ -120,6 +120,8 @@ public class Main extends AppCompatActivity
         if (id == R.id.nav_camera) {
             // Handle the camera action
             Intent travel= new Intent (Main.this,TravelSchedule.class);
+            travel.putExtra("ID",userID);
+            travel.putExtra("Password",userPassword);
             startActivity(travel);
         } else if (id == R.id.nav_weather_forecast) {
 

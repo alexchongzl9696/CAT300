@@ -39,6 +39,8 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
     Date date;
+    int dMonth;
+    String dmin1, dmin2;
     ArrayList<DocumentSnapshot> docList2;
     int numOfDoc = 0;
     final Handler handler = new Handler();
@@ -82,11 +84,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 LatLng sydney = new LatLng(currLocation.getLatitude(), currLocation.getLongitude());
                 Log.d("hahaha1", "asdasdasd");
                 //mMap.addMarker(new MarkerOptions().position(sydney).title("You are HERE"));
-                if(firstRun == true)
-                {
+                //if(firstRun == true)
+               // {
                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoomLevel));
-                    firstRun = false;
-                }
+                    //firstRun = false;
+                //}
             }
         };
         if ((ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) && ActivityCompat.checkSelfPermission(this, ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -202,8 +204,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         c2.add(Calendar.HOUR, 1);
         c.setTimeZone(TimeZone.getTimeZone("GMT+08:00"));
         c2.setTimeZone(TimeZone.getTimeZone("GMT+08:00"));
+
+        int min1 = c.get(Calendar.MINUTE);
+        int min2 = c.get(Calendar.MINUTE);
+
+        dMonth = c.get(Calendar.MONTH) + 1;
+        if(min1 < 10)
+            dmin1 = "0" + min1;
+        else
+            dmin1 = "" + min1;
+
+
+
         mMap.clear();
-        Toast.makeText(MapsActivity.this, "From : " + c.getTime().toString() + "\nTo      : " + c2.getTime().toString(), Toast.LENGTH_LONG).show();
+        Toast.makeText(MapsActivity.this, "From : " + c.get(Calendar.DAY_OF_MONTH) + "-" + dMonth + "-" + c.get(Calendar.YEAR)
+                + " " + c.get(Calendar.HOUR_OF_DAY) + ":" + dmin1
+                + "\nTo      : " + c2.get(Calendar.DAY_OF_MONTH) + "-" + dMonth + "-" + c2.get(Calendar.YEAR)
+                + " " + c2.get(Calendar.HOUR_OF_DAY) + ":" + dmin1, Toast.LENGTH_LONG).show();
+
         for(int i = 0; i < docList.size(); i++)
         {
             if(docList.get(i).getTimestamp("Start").toDate().before(givenDate)
@@ -216,7 +234,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 i--;
             }
         }
-        Log.d("hahaha9", "asdasd");
+
         return docList.size();
     }
 }
